@@ -29,8 +29,10 @@ app.title = 'Movin\'OnUP!'
 # API keys and datasets 
 mapbox_access_token = 'pk.eyJ1IjoiZHluZGwiLCJhIjoiY2p4M2gyYm9wMDBzbDRhbmxzYWMya2tvZCJ9.xWu9JsGNMrFmk6yiydXlqw'
 
+print('so far so good!')
+
 # loading data
-path = '~/MOU_data/'
+path = 'https://github.com/dyndl/Movin-On-UP/MOU_data/'
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
 all_files = glob.glob(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 
