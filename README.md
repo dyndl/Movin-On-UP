@@ -1,9 +1,10 @@
 # Build files and requirements for Movin' On UP! app
 
-A full explanation is available on [Medium](https://medium.com/@austinlasseter/how-to-deploy-a-simple-plotly-dash-app-to-heroku-622a2216eb73).
+**Movin' On UP!** is a home buyer's location quality and budget optimzer by zipcode (currently covers Los Angeles only). Current version selects and ranks zipcodes by user's home buying budget range and user weightings for: (1) wealth of the local neighborhood, (2) 5yr home appreciation, and (3) level of criminal activity.
 
-You can view the finished app on [Heroku](https://flying-dog.herokuapp.com/).
+A full explanation of the deployment procedure can be found [here on Medium](https://medium.com/@austinlasseter/how-to-deploy-a-simple-plotly-dash-app-to-heroku-622a2216eb73) or can be accesed directly by fork [here]https://github.com/austinlasseter/flying-dog-beers.
 
-If you'd like to tinker with the colors of your app, try using HEX codes from [HTML Color Codes](https://htmlcolorcodes.com/)!  
+You can view the finished app on [Heroku](https://movin-on-up1.herokuapp.com/).
 
-**Note:** Plotly Dash apps can only be viewed in a modern browser (like Chrome or Mozilla). They won't render in antediluvian browsers such as Microsoft.
+
+**Note:** App is still in development: (1) it is not currently optimized for speed and (2) current version maybe unstable!
