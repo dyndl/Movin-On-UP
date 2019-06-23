@@ -81,11 +81,6 @@ mock==3.0.5
 more-itertools==5.0.0
 mrjob==0.6.9
 munch==2.3.2
-nb-conda==2.2.1
-nb-conda-kernels==2.2.1
-nbconvert==5.5.0
-nbdime==1.0.6
-nbformat==4.4.0
 ndg-httpsclient==0.5.1
 notebook==5.7.8
 numpy==1.16.3
