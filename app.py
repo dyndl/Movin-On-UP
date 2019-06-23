@@ -30,7 +30,7 @@ app.title = 'Movin\'OnUP!'
 mapbox_access_token = 'pk.eyJ1IjoiZHluZGwiLCJhIjoiY2p4M2gyYm9wMDBzbDRhbmxzYWMya2tvZCJ9.xWu9JsGNMrFmk6yiydXlqw'
 
 # loading data
-path = '/Users/dmlee/Desktop/Insight_DS/data/MOU_data/'
+path = '~/MOU_data/'
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
 all_files = glob.glob(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 
