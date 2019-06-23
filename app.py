@@ -17,9 +17,6 @@ from plotly.graph_objs import *
 from uszipcode import Zipcode
 from uszipcode import SearchEngine
 from geopy.geocoders import Nominatim
-#global ranked_data
-
-#global map_data, ranked_data
 
 geolocator = Nominatim(user_agent="Movin\'OnUp") #"specify_your_app_name_here"
 
@@ -39,151 +36,13 @@ all_files = glob.glob(path + 'ZILLOW/Z*_MSPAHforecast.csv')
 
 li = []
 
-LA_zipcodes = ['90014',
- '90013',
- '90017',
- '90006',
- '90029',
- '90071',
- '90037',
- '90008',
- '90018',
- '90023',
- '90031',
- '90822',
- '90731',
- '90028',
- '90019',
- '90025',
- '90049',
- '91406',
- '91405',
- '91335',
- '90065',
- '90062',
- '90003',
- '90043',
- '90291',
- '90304',
- '91605',
- '90020',
- '91356',
- '91364',
- '91303',
- '90057',
- '90015',
- '90007',
- '90033',
- '90035',
- '90012',
- '91607',
- '90004',
- '91604',
- '90059',
- '90010',
- '90064',
- '90011',
- '91331',
- '90061',
- '90032',
- '90044',
- '90502',
- '90063',
- '90744',
- '90292',
- '91340',
- '91402',
- '91324',
- '90021',
- '90079',
- '90026',
- '90016',
- '90710',
- '90248',
- '90732',
- '90717',
- '90046',
- '90038',
- '90069',
- '90048',
- '90036',
- '90211',
- '90404',
- '90024',
- '90067',
- '90077',
- '90034',
- '90402',
- '91423',
- '90210',
- '91403',
- '91411',
- '91401',
- '91436',
- '91316',
- '91343',
- '91325',
- '91201',
- '90041',
- '90042',
- '91205',
- '90039',
- '91204',
- '90305',
- '90047',
- '90001',
- '90058',
- '90066',
- '90293',
- '90094',
- '90056',
- '90045',
- '90405',
- '90230',
- '91602',
- '91608',
- '91601',
- '91606',
- '91214',
- '91352',
- '91040',
- '91504',
- '91342',
- '91306',
- '91326',
- '91344',
- '91304',
- '90002',
- '90247',
- '91345',
- '90005',
- '91367',
- '90027',
- '91030',
- '90501',
- '90068',
- '90272',
- '90232',
- '91505',
- '91206',
- '91311',
- '90301',
- '90212',
- '91307',
- '90804',
- '90740',
- '90403',
- '91301',
- '90814',
- '90302']
+LA_zipcodes = ['90014','90013','90017','90006','90029','90071','90037','90008','90018','90023','90031','90822','90731','90028','90019','90025','90049','91406','91405','91335','90065','90062','90003','90043','90291','90304','91605','90020','91356','91364','91303','90057','90015','90007','90033','90035','90012','91607','90004','91604','90059','90010','90064','90011','91331','90061','90032','90044','90502','90063','90744','90292','91340','91402','91324','90021','90079','90026','90016','90710','90248','90732','90717','90046','90038','90069','90048','90036','90211','90404','90024','90067','90077','90034','90402','91423','90210','91403','91411','91401','91436','91316','91343','91325','91201','90041','90042','91205','90039','91204','90305','90047','90001','90058','90066','90293','90094','90056','90045','90405','90230','91602','91608','91601','91606','91214','91352','91040','91504','91342','91306','91326','91344','91304','90002','90247','91345','90005','91367','90027','91030','90501','90068','90272','90232','91505','91206','91311','90301','90212','91307','90804','90740','90403','91301','90814','90302']
+
 LA_other_zipcodes = ['90009','90030','90050','90051','90052','90053','90054',\
 '90055','90060','90070','90072','90074','90075','90076','90078','90079','90080',\
 '90081','90082','90083','90084','90085','90086','90087','90088','90090','90091',\
 '90093','90095','90096','90099','90134','90189'] 
-#print('Length',len(LA_zipcodes),len(LA_other_zipcodes))
-# for zipcode in LA_zipcodes:
-#     MSPfile = 'ZILLOW/Z'+zipcode+'_MSPAH.csv' #MSP
-#     forecaster = 'ZILLOW/Z'+zipcode+'_MSPAH'+'forecast'+'.csv'
+
 count = 0
 for filename in all_files:
     LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
@@ -196,15 +55,13 @@ for filename in all_files:
         li.append(df)
         count+=1
 
-#print(count)
-
 userforecast = pd.concat(li, axis=0, ignore_index=True)
 forecast_data = userforecast[['ds','zipcode','trend','trend_lower','trend_upper','Latitude','Longitude']]
 #data = pd.DataFrame([],columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
 ranked_data = pd.DataFrame([],columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
 
-#set initial values for min and max
-minMSP = 0
+#set initial values for min and max budget price
+minMSP = 250000
 maxMSP = 600000
 
 colors = {
@@ -287,15 +144,8 @@ def gen_map(map_data):
         }],
         "layout": layout_map
     }
-#flatten list tool
-def flatten(foo):
-    for x in foo:
-        if hasattr(x, '__iter__') and not isinstance(x, str):
-            for y in flatten(x):
-                yield y
-        else:
-            yield x
 
+#app calls
 #__________________________________
 #__________________________________
 
@@ -312,7 +162,6 @@ app.layout = html.Div([
                         'color': colors['text']},
                     className = "nine columns"
             ),
-
             html.Img(
                 src="https://assets-global.website-files.com/575a31d2ce5d01dc7a20de45/575a31d2ce5d01dc7a20ded3_insight_logo.png",
                 className='three columns',
@@ -325,13 +174,8 @@ app.layout = html.Div([
                     'margin-right': 20
                 },
             ),
-
             html.Div(children='''A home pre-search optimization app''', 
                     style={
-                        # 'height': '14%',
-                        # 'width': '28',
-                        # 'float': 'left',
-                        # # 'position': 'fixed',
                         'margin-top': 0,
                         'margin-right': 15,
                         'margin-bottom': 15,
@@ -354,9 +198,7 @@ app.layout = html.Div([
                         'height': '20%',
                         'width': '42%',
                         'float': 'left',
-                        # 'position': 'fixed',
                         'textAlign': 'left'
-                        #'color': colors['light_text']
             }),
             dcc.Input(id='maxMSPinput', type='number', value=maxMSP,
                         placeholder='Enter max. price', 
@@ -364,18 +206,8 @@ app.layout = html.Div([
                         'height': '20%',
                         'width': '42%',
                         'float': 'left',
-                        # 'position': 'fixed',
                         'textAlign': 'left'
-                        #'color': colors['light_text']
-            }),          
-            # html.Div(id='userMSPoutput',
-            #             style={
-            #             'margin-top': 0,
-            #             'margin-right': 45,
-            #             'margin-bottom': 35,
-            #             'textAlign': 'left'
-            # }),
-        
+            }),                
             html.Div(children='Min. Home Price   <--->   Max. Home Price (USD)',
                         style={
                         # 'float':'left',
@@ -410,11 +242,6 @@ app.layout = html.Div([
                         7: {'label': ''},
                         8: {'label': ''},
                         9: {'label': ''},
-                        # 10: {'label': '10 Years'},
-                        # 11: {'label': ''},
-                        # 12: {'label': ''},
-                        # 13: {'label': ''},
-                        # 14: {'label': ''},
                         10: {'label': '10 Years', 'style': {'color': '#f50'}}
                     },
             ),
@@ -520,22 +347,6 @@ app.layout = html.Div([
 
 #callback section 
 #-------------------
-# @app.callback(Output('userMSPoutput', 'children'),
-#               [Input('minMSPinput', 'value'),
-#                Input('maxMSPinput', 'value')])
-# def selected_price_range(minMSP, maxMSP):
-#     minmax = [minMSP,maxMSP]
-#     return None #minMSP,maxMSP
-
-# @app.callback(dash.dependencies.Output('Location-Value-output-container', 'children'),
-#             [dash.dependencies.Input('Location_Value', 'value')])
-# def location_value(Location_Value):
-#     return None #Location_Value
-
-# @app.callback(dash.dependencies.Output('Yearly-outlook-output-container', 'children'),
-#             [dash.dependencies.Input('Yearly_outlook', 'value')])
-# def show_yearly_outlook(Yearly_outlook):
-#     return None #Yearly_outlook #u'{} Year Outlook'.format(Yearly_outlook)
 
 # @app.callback(
 #     Output('map-graph', 'figure'),
@@ -557,9 +368,10 @@ app.layout = html.Div([
      ])
 def update_selected_row_indices(minMSP, maxMSP,year,wealth):
     global forecast_data, ranked_data
+    
     map_aux = forecast_data.copy()
     ranked_aux = ranked_data.copy()
-    #print(map_aux.ds)
+
     now = datetime.today().strftime('%Y')
     now0 = datetime.today()
     nowp = datetime.today().strftime('%Y-%m-%d')  
@@ -571,34 +383,18 @@ def update_selected_row_indices(minMSP, maxMSP,year,wealth):
 
     five_years = np.int(now) + 5
     projected_5yrs = now0.replace(year=five_years).strftime('%Y-%m-%d')
-    #print(projected_5yrs,nowp)
-    #print(map_aux.ds.dt.strftime('%Y-%m-%d'))
     five_year_projection_arr = map_aux.ds.dt.strftime('%Y-%m-%d') == projected_5yrs
     now_projection_arr = map_aux.ds.dt.strftime('%Y-%m-%d') == nowp
-    #print(np.sum(five_year_projection_arr),np.sum(now_projection_arr))
-    #print([five_year_projection_arr, now_projection_arr])
-    #sys.exit()
+
     a = map_aux.zipcode.loc[five_year_projection_arr]
     b = map_aux.zipcode.loc[now_projection_arr]
 
     c = [a] + [b]
     c0 = [y for x in c for y in x]
-    #print(c0)
-    c1= pd.DataFrame({'mergedzips':c0})
-     #[a[i]*2 - b[i]*1 for i in range(len(b))]
-    #print(c1)
-    #sys.exit()
-    #combined_arr = np.ndarray.flatten([a, b])
+    c1 = pd.DataFrame({'mergedzips':c0})
     nonmatchedarr = c1.drop_duplicates(keep=False)
-     #map_aux.zipcode.loc[c]
-    #print(nonmatchedarr.mergedzips.values[0])  
     arr = [np.where(map_aux.zipcode.loc[now_projection_arr] == nonmatchedarr.mergedzips.values[i])[0][0] for i in range(len(nonmatchedarr))]
-    # for i in range(len(nonmatchedarr)):
-    #     for j in range(len(now_projection_arr)):
-    #         np.where((map_aux.zipcode.loc[now_projection_arr]) == nonmatchedarr.mergedzips.values[i])
-    #         now_new_arr = 
-    #print(np.where(map_aux.zipcode.loc[now_projection_arr] == nonmatchedarr.mergedzips.values[0])[0][0],nonmatchedarr.mergedzips.values[0],map_aux.zipcode.loc[now_projection_arr].values[19])
-    #print(arr)
+
     adjust_arr = []
     i = 0
     j = 0
@@ -608,22 +404,10 @@ def update_selected_row_indices(minMSP, maxMSP,year,wealth):
             if j in arr:
                 adjust_arr.append(i) 
 
-    #adjust_arr = [[i,j] if now_projection_arr.values[i] == True]
     now_projection_arr[adjust_arr] = False
-    #print(arr, adjust_arr)
-    #sys.exit()
-    #['ds','zipcode','trend','trend_lower','trend_upper','Latitude','Longitude'] 
-    # i=0
-    # for dex in nonmatchedarr.index:
-    #     map_aux.loc[map_aux.index[-1]+i] = [projected_5yrs,nonmatchedarr[dex],0,0,0,map_aux.Latitude[dex],map_aux.Longitude[dex]]
-    #     i+=1
-    #nowarr = [dex for zipc in nonmatchedarr.values]
-    #print(np.sum(map_aux.Latitude.loc[five_year_projection_arr] >= ),np.sum(map_aux.Latitude.loc[now_projection_arr] != 0))
-    #scores
-    #now_projection_arr[map_aux.zipcode.loc[now_projection_arr] == nonmatchedarr.values]] = False
-    #print(np.sum(now_projection_arr))
-    #sys.exit()
 
+# User weighting scores
+#----------------------
     #ROI score
     avgROI = (map_aux.trend.loc[five_year_projection_arr].values - map_aux.trend.loc[now_projection_arr].values)/(5 * map_aux.trend.loc[now_projection_arr].values) * 100
     
@@ -640,15 +424,8 @@ def update_selected_row_indices(minMSP, maxMSP,year,wealth):
     overall_score = np.sqrt((ROIscore**2 + wealth_score**2)/2) * 100
     overall_rank = np.argsort(overall_score)
 
-    #print(wealth_score, overall_rank)
 
-    #sys.exit()
-    #print('Ugh',ROIraw, 'why',avgROI,'huh?',map_aux.trend.loc[five_year_projection_arr].values,'this',map_aux.trend.loc[five_year_projection_arr].values - map_aux.trend.loc[now_projection_arr].values,map_aux.trend.loc[now_projection_arr].values)#, overall_score,overall_rank,ROIscore**2,wealth_score**2)
-    # sys.exit()
     projected_data = map_aux.loc[map_aux.ds.dt.strftime('%Y-%m-%d') == projected]
-    #print(table)
-    #print(featuresWithinBudget[0:10])
-    #map_aux = featuresWithinBudget
 
     #ranked table 
     ranked_aux['Rankings'] = overall_rank + 1
@@ -659,16 +436,13 @@ def update_selected_row_indices(minMSP, maxMSP,year,wealth):
     ranked_aux['Wealth Rank'] = wealth_score
     ranked_aux['Latitude'] = map_aux['Latitude'].loc[now_projection_arr].values
     ranked_aux['Longitude'] = map_aux['Longitude'].loc[now_projection_arr].values
-    #print(ranked_aux[0:10])
-    #featuresWithinBudget = budgetdata[np.logical_and(budgetdata['trend'] >= minMSP,budgetdata['trend'] < maxMSP)]
-
+    
+    #ranked data within budget
     ranked_budget_data = ranked_aux[np.logical_and(ranked_aux['Trend'] >= minMSP,ranked_aux['Trend'] < maxMSP)]
-    #print(ranked_budget_data)
     ranked_budget_data.sort_values('Rankings',inplace = True)
-    #sys.exit()
-    #map_data = featuresWithinBudget.to_dict('records')
+
     ranked_data = ranked_budget_data.to_dict('records')
-    #print(data)
+
     return ranked_data
 
 
