@@ -675,6 +675,6 @@ def update_selected_row_indices(minMSP, maxMSP,year,wealth):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
 
 
