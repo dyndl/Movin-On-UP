@@ -1,4 +1,4 @@
-# How to deploy a simple Plotly Dash app on Heroku
+# Build files and requirements for Movin' On UP! app
 
 A full explanation is available on [Medium](https://medium.com/@austinlasseter/how-to-deploy-a-simple-plotly-dash-app-to-heroku-622a2216eb73).
 
