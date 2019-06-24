@@ -6,7 +6,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import pandas as pd
 import numpy as np
-import glob
+#import glob
 from datetime import datetime
 import dash_table as dt
 
@@ -34,7 +34,7 @@ print('so far so good!')
 # loading data
 path = "https://raw.githubusercontent.com/dyndl/Movin-On-UP/master/MOU_data/"
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
-all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
+#all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
 
 print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 # print('-----------------------------------------')
