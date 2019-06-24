@@ -34,12 +34,12 @@ print('so far so good!')
 # loading data
 path = "https://github.com/dyndl/Movin-On-UP/MOU_data/"
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
-all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
+# all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
 
-print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
-print('-----------------------------------------')
-filenames = [filename for filename in all_files]
-print(filenames)
+# print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
+# print('-----------------------------------------')
+# filenames = [filename for filename in all_files]
+# print(filenames)
 
 li = []
 
@@ -69,11 +69,11 @@ LA_other_zipcodes = ['90009','90030','90050','90051','90052','90053','90054',\
 print(LA_other_zipcodes)
 
 count = 0
-for filename in all_files:
-    print(filename)
-    LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
-    print(LA_zipcode)
+for LA_zipcode in LA_zipcodes:
+    #LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
+    #print(LA_zipcode)
     if LA_zipcode not in LA_other_zipcodes:
+        filename = path + "ZILLOW2/Z"+LA_zipcode+"_MSPAHforecast.csv"
         df = pd.read_csv(filename, index_col=None, header=0)
         df['zipcode'] = LA_zipcode
         lat_lon = search.by_zipcode(LA_zipcode).values()[7:9]
