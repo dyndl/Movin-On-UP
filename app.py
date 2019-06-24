@@ -32,11 +32,11 @@ mapbox_access_token = 'pk.eyJ1IjoiZHluZGwiLCJhIjoiY2p4M2gyYm9wMDBzbDRhbmxzYWMya2
 print('so far so good!')
 
 # loading data
-path = "https://github.com/dyndl/Movin-On-UP/MOU_data/"
+path = "https://raw.githubusercontent.com/dyndl/Movin-On-UP/master/MOU_data/"
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
-# all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
+all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
 
-# print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
+print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 # print('-----------------------------------------')
 # filenames = [filename for filename in all_files]
 # print(filenames)
@@ -66,14 +66,12 @@ LA_other_zipcodes = ['90009','90030','90050','90051','90052','90053','90054',\
 '90081','90082','90083','90084','90085','90086','90087','90088','90090','90091',\
 '90093','90095','90096','90099','90134','90189'] 
 
-print(LA_other_zipcodes)
+#print(LA_other_zipcodes)
 
 count = 0
-for LA_zipcode in LA_zipcodes:
-    #LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
-    #print(LA_zipcode)
+for filename in all_files:
+    LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
     if LA_zipcode not in LA_other_zipcodes:
-        filename = path + "ZILLOW2/Z"+LA_zipcode+"_MSPAHforecast.csv"
         df = pd.read_csv(filename, index_col=None, header=0)
         df['zipcode'] = LA_zipcode
         lat_lon = search.by_zipcode(LA_zipcode).values()[7:9]
@@ -81,11 +79,25 @@ for LA_zipcode in LA_zipcodes:
         df['Longitude'] = lat_lon[1]
         li.append(df)
         count+=1
+
+# count = 0
+# for LA_zipcode in LA_zipcodes:
+#     #LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
+#     #print(LA_zipcode)
+#     if LA_zipcode not in LA_other_zipcodes:
+#         filename = path + "ZILLOW2/Z"+LA_zipcode+"_MSPAHforecast.csv"
+#         df = pd.read_csv(filename, index_col=None, header=0)
+#         df['zipcode'] = LA_zipcode
+#         lat_lon = search.by_zipcode(LA_zipcode).values()[7:9]
+#         df['Latitude'] = lat_lon[0]
+#         df['Longitude'] = lat_lon[1]
+#         li.append(df)
+#         count+=1
 #print(df)
 userforecast = pd.concat(li, axis=0, ignore_index=True)
 forecast_data = userforecast[['ds','zipcode','trend','trend_lower','trend_upper','Latitude','Longitude']]
-#data = pd.DataFrame([],columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
-ranked_data = pd.DataFrame([],columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
+#data = pd.DataFrame(columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
+ranked_data = pd.DataFrame(columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
 
 #set initial values for min and max budget price
 minMSP = 250000
