@@ -32,13 +32,14 @@ mapbox_access_token = 'pk.eyJ1IjoiZHluZGwiLCJhIjoiY2p4M2gyYm9wMDBzbDRhbmxzYWMya2
 print('so far so good!')
 
 # loading data
-path = 'https://github.com/dyndl/Movin-On-UP/MOU_data/'
+path = "https://github.com/dyndl/Movin-On-UP/MOU_data/"
 #path = r'C:\DRO\DCL_rawdata_files' # use your path
-all_files = glob.glob(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
+all_files = glob.glob(path + "ZILLOW2/Z*_MSPAHforecast.csv")
 
 print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 print('-----------------------------------------')
-#print(all_files)
+filenames = [filename for filename in all_files]
+print(filenames)
 
 li = []
 
@@ -64,6 +65,8 @@ LA_other_zipcodes = ['90009','90030','90050','90051','90052','90053','90054',\
 '90055','90060','90070','90072','90074','90075','90076','90078','90079','90080',\
 '90081','90082','90083','90084','90085','90086','90087','90088','90090','90091',\
 '90093','90095','90096','90099','90134','90189'] 
+
+print(LA_other_zipcodes)
 
 count = 0
 for filename in all_files:
