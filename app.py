@@ -67,7 +67,9 @@ LA_other_zipcodes = ['90009','90030','90050','90051','90052','90053','90054',\
 
 count = 0
 for filename in all_files:
+    print(filename)
     LA_zipcode = filename.split('_', 2)[1].split('Z')[2]    
+    print(LA_zipcode)
     if LA_zipcode not in LA_other_zipcodes:
         df = pd.read_csv(filename, index_col=None, header=0)
         df['zipcode'] = LA_zipcode
