@@ -30,6 +30,9 @@ search = SearchEngine(simple_zipcode=True)
 app = dash.Dash(__name__) #__name__, external_stylesheets=external_stylesheets
 app.title = 'Movin\'OnUP!'
 
+server = app.server
+server.secret_key = os.environ.get("SECRET_KEY","secret")
+
 # API keys and datasets 
 mapbox_access_token = 'pk.eyJ1IjoiZHluZGwiLCJhIjoiY2p4M2gyYm9wMDBzbDRhbmxzYWMya2tvZCJ9.xWu9JsGNMrFmk6yiydXlqw'
 
