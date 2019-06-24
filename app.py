@@ -38,7 +38,7 @@ all_files = glob.glob(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 
 print(path + 'ZILLOW2/Z*_MSPAHforecast.csv')
 print('-----------------------------------------')
-print(all_files)
+#print(all_files)
 
 li = []
 
@@ -78,7 +78,7 @@ for filename in all_files:
         df['Longitude'] = lat_lon[1]
         li.append(df)
         count+=1
-print(df)
+#print(df)
 userforecast = pd.concat(li, axis=0, ignore_index=True)
 forecast_data = userforecast[['ds','zipcode','trend','trend_lower','trend_upper','Latitude','Longitude']]
 #data = pd.DataFrame([],columns = ['Rankings', 'Zipcode', 'Trend','Avg. ROI','ROI Rank' ,'Wealth Rank','Latitude','Longitude'])
