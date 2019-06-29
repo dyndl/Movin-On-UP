@@ -4,7 +4,7 @@
 
 A full explanation of the deployment procedure can be found [here on Medium](https://medium.com/@austinlasseter/how-to-deploy-a-simple-plotly-dash-app-to-heroku-622a2216eb73) or can be accesed directly by fork [here](https://github.com/austinlasseter/flying-dog-beers).
 
-You can view the finished app on [Heroku](https://movin-on-up1.herokuapp.com/).
+You can view the finished app hosted on [Amazon Web Services](https://movin-on-up1.fun).
 
 
 **Note:** App is still in development: (1) it is not currently optimized for speed and (2) current version maybe unstable!
